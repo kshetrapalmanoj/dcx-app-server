@@ -26,6 +26,9 @@ app.use('/api/developer',authRoute);
 app.use('/verify',verifyRoute);
 
 app.use('/api/contact',contactRoute);
+app.get('/',(req,res)=>{
+  res.send('Welcome')
+})
 
 
 app.listen(3000,()=>console.log("Server is running at 3000"))
