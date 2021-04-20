@@ -27,7 +27,7 @@ app.use('/verify',verifyRoute);
 
 app.use('/api/contact',contactRoute);
 app.get('/',(req,res)=>{
-    res.send('Welcome')
+    res.send('Welcome! This is the DCX Developer Directory App')
 })
 
 app.listen(process.env.PORT || 3000,()=>console.log("Server is running at 3000"))
