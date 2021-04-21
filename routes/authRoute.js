@@ -53,11 +53,11 @@ router.post('/login',async (req,res)=>{
 
     //checks developer exists or not
     const developer = await Developer.findOne({email:req.body.email});
-    if(!developer) return res.status(400).json({message:'Invalid Developer Email'});
+    if(!developer) return res.status(400).json({message:'Invalid Credentials'});
 
     //checking password
     const validPassword = await bcrypt.compare(req.body.password,developer.password);
-    if(!validPassword) return res.status(400).json({message:'Invalid Usename and Password'});
+    if(!validPassword) return res.status(400).json({message:'Invalid Credentials'});
 
     const token = await jwt.sign({_id:developer._id},process.env.TOKEN_SECRET,{expiresIn:'24h'});
     if(token) return res.status(200).json(token);
