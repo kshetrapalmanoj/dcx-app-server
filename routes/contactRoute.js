@@ -4,6 +4,7 @@ const Contact = require('../model/Contact');
 router.post('/register', async (req, res) => {
 
   const contact = new Contact({
+    //contact form properties
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,

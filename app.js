@@ -23,10 +23,10 @@ app.use(cors());
 app.use(express.json());
 
 //Middleware Route
-app.use('/api/developer', authRoute);
+app.use('/api/developer', authRoute);//developer middleware
 app.use('/verify', verifyRoute);
 
-app.use('/api/contact', contactRoute);
+app.use('/api/contact', contactRoute);//contact middleware
 app.get('/', (req, res) => {
   res.send('Welcome! This is the DCX Developer Directory App')
 })
