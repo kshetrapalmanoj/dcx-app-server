@@ -30,6 +30,7 @@ router.post('/register',async (req,res)=>{
     }
 });
 
+//gets dveeloper data as per pagination offset
 router.get('/register/:offset',async (req,res)=>{
   const offset = parseInt(req.params.offset);
   const data = await Developer.find().skip(offset).limit(5);
@@ -39,7 +40,7 @@ router.get('/register/:offset',async (req,res)=>{
 
 });
 
-
+//get all developers (for testing with postman)
 router.get('/', (req, res) => {
   Developer.find((err, docs) => {
       if (!err) { res.send(docs); }
@@ -53,12 +54,13 @@ router.post('/login',async (req,res)=>{
 
     //checks developer exists or not
     const developer = await Developer.findOne({email:req.body.email});
-    if(!developer) return res.status(400).json({message:'Invalid Developer Email'});
+    if(!developer) return res.status(400).json({message:'Invalid Credentials'});
 
     //checking password
     const validPassword = await bcrypt.compare(req.body.password,developer.password);
-    if(!validPassword) return res.status(400).json({message:'Invalid Usename and Password'});
+    if(!validPassword) return res.status(400).json({message:'Invalid Credentials'});
 
+     //token associated with developer id gets generated
     const token = await jwt.sign({_id:developer._id},process.env.TOKEN_SECRET,{expiresIn:'24h'});
     if(token) return res.status(200).json(token);
     console.log('Logged in')
