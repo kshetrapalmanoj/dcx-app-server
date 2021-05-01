@@ -141,6 +141,37 @@ router.get('/', (req, res) => {
 });
 
 //Login
+/**
+ * @swagger
+ * api/developer/login:
+ *   post:
+ *     summary: User Login
+ *     tags: [Authentication]
+ *     parameters:
+ *       - in: body
+ *         name: user
+ *         description: Used by users to login.
+ *         schema:
+ *           type: application/json
+ *           required:
+ *             - email
+ *             - password
+ *           properties:
+ *             email:
+ *               type: string
+ *             password:
+ *               type: string
+ *           example:
+ *              {
+ *                  "email" : "someone@examples.com",
+ *                  "password" : "secure password",
+ *              }
+ *     responses:
+ *       200:
+ *         description: It will return the JWT token
+ *       400:
+ *         description: Invalid Credentials             
+ */
 router.post('/login', async (req, res) => {
     console.log(req.body);
 
