@@ -1,16 +1,20 @@
 const router = require('express').Router();
 const Contact = require('../model/Contact');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
 
   const contact = new Contact({
-    //contact form properties
-    name: req.body.name,
+    full_name: req.body.full_name,
     email: req.body.email,
-    phone: req.body.phone,
+    phoneno: req.body.phoneno,
     location: req.body.location,
     budget: req.body.budget,
     website: req.body.website,
+    startDate: req.body.startDate,
+    pages: req.body.pages,
+    color: req.body.color
   });
   try {
 

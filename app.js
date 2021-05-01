@@ -5,6 +5,11 @@ const app = express();
 const cors = require('cors');
 
 //routes required
+//Swagger
+const swaggerUI = require('swagger-ui-express')
+const swaggerJsDoc = require('swagger-jsdoc')
+
+//import routes
 const authRoute = require('./routes/authRoute');
 const verifyRoute = require('./routes/dashboard');
 const contactRoute = require('./routes/contactRoute');
@@ -14,8 +19,30 @@ dotenv.config();
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true }, () => {
-  console.log("Connected to DB");
+    console.log("Connected to DB");
 })
+
+//Swagger-------------------------
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "DCX Developer Directory API",
+            version: "1.0.0",
+            description: "This is a simple DCX Developer API made with Express and documented with Swagger",
+        },
+        servers: [
+            {
+                url: "http://localhost:3000/",
+            },
+        ],
+    },
+    apis: ["./routes/*.js"],
+};
+
+const specs = swaggerJsDoc(options)
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }))
+//-------------------------------
 
 app.use(cors());
 //Middleware
@@ -23,13 +50,12 @@ app.use(cors());
 app.use(express.json());
 
 //Middleware Route
-app.use('/api/developer', authRoute);//developer middleware
+app.use('/api/developer', authRoute);
 app.use('/verify', verifyRoute);
+app.use('/api/contact', contactRoute);
 
-app.use('/api/contact', contactRoute);//contact middleware
 app.get('/', (req, res) => {
-  res.send('Welcome! This is the DCX Developer Directory App')
+    res.send('Welcome! This is the DCX Developer Directory App')
 })
 
-
-app.listen(3000, () => console.log("Server is running at 3000"))
+app.listen(process.env.PORT || 3000, () => console.log("Server is running at 3000"))
