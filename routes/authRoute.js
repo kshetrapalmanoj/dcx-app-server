@@ -3,82 +3,6 @@ const Developer = require('../model/Developer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-//Register new developer
-/**
-*  @swagger
-*    components:
-*     schemas:
-*       Developer:
-*         type: object
-*         required:
-*           - full_name
-*           - email
-*           - password
-*           - group
-*         properties:
-*           _id:
-*             type: string
-*             description: The auto-generated id of the user.
-*           full_name:
-*             type: string
-*             description: The Full name of the user.
-*           email:
-*             type: string
-*             description: The email of the user.
-*           password:
-*             type: string
-*             description: The password of the user.
-*           group:
-*             type: boolean
-*             description: User belongs to which group (admin/developer)
-*           __v:
-*             type: integer
-*             description: The version of record.
-*/
-
-/**
- * @swagger
- * api/developer/register:
- *   post:
- *     summary: Returns the list of all the users
- *     tags: [Developer]
- *     parameters:
- *       - in: body
- *         name: user
- *         description: The user to create.
- *         schema:
- *           type: application/json
- *           required:
- *             - email
- *             - password
- *             - full_name
- *             - group
- *           properties:
- *             email:
- *               type: string
- *             password:
- *               type: string
- *             full_name:
- *               type: string
- *             group:
- *               type: string
- *           example:
- *              {
- *                  "email" : "someone@examples.com",
- *                  "password" : "secure hashed password",
- *                  "full_name" : "John Doe",
- *                  "group" : "Admin"
- *              }
- *     responses:
- *       200:
- *         description: Success
- *       400:
- *         description: Email Already Exists
- *         content:
- *           application/json:
- *             schema:
- *                  
- */
 router.post('/register', async (req, res) => {
 
     //Checks email exists in db or not
@@ -116,23 +40,6 @@ router.get('/register/:offset', async (req, res) => {
 
 });
 
-//get all developers (for testing with postman)
-/**
- * @swagger
- * api/developer/:
- *   get:
- *     summary: Returns the list of all the users
- *     tags: [Developer]
- *     responses:
- *       200:
- *         description: The list of all the users
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Developer'
- */
 router.get('/', (req, res) => {
     Developer.find((err, docs) => {
         if (!err) { res.send(docs); }
