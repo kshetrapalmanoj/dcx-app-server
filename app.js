@@ -37,11 +37,11 @@ const options = {
             },
         ],
     },
-    apis: ["./routes/*.js"],
+    apis: ["./api-docs/apis.js"],
 };
 
 const specs = swaggerJsDoc(options)
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }))
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }))
 //-------------------------------
 
 app.use(cors());
@@ -51,11 +51,11 @@ app.use(express.json());
 
 //Middleware Route
 app.use('/api/developer', authRoute);
-app.use('/verify', verifyRoute);
+app.use('/api/verify', verifyRoute);
 app.use('/api/contact', contactRoute);
 
 app.get('/', (req, res) => {
     res.send('Welcome! This is the DCX Developer Directory App')
 })
 
-app.listen(process.env.PORT || 3000, () => console.log("Server is running at 3000"))
+app.listen(process.env.PORT || 3001, () => console.log(`Server is running at ${process.env.PORT || 3001}`))
