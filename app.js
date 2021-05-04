@@ -33,7 +33,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:3000/",
+                url: `http://localhost:${process.env.PORT || 3001}/`,
             },
         ],
     },
@@ -41,7 +41,7 @@ const options = {
 };
 
 const specs = swaggerJsDoc(options)
-app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }))
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(specs))
 //-------------------------------
 
 app.use(cors());
