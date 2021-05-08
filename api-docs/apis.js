@@ -222,3 +222,67 @@
  *         description: Access Denied
  *
  */
+
+//Password Reset Link
+/**
+* @swagger
+*  api/developer/send-reset-link:
+*   post:
+*     summary: For sending link with reset token to user's email
+*     tags: [Developer]
+*     parameters:
+*       - in: body
+*         name: info
+*         description: For passing email.
+*         schema:
+*           type: application/json
+*           required:
+*             - email
+*           properties:
+*             email:
+*               type: string
+*           example:
+*              {
+*                  "email" : "someone@examples.com"
+*              }
+*     responses:
+*       200:
+*         description: Reset link sent on your mail
+*       400:
+*         description: Error sending mail
+*       422:
+*         description: No user found with that email
+*/
+
+//Update Password Route
+/**
+* @swagger
+*  api/developer/new-password:
+*   post:
+*     summary: For updating user's password with the help of reset token
+*     tags: [Developer]
+*     parameters:
+*       - in: body
+*         name: info
+*         description: For passing email & token.
+*         schema:
+*           type: application/json
+*           required:
+*             - token
+*             - password
+*           properties:
+*             token:
+*               type: string
+*             password:
+*               type: string
+*           example:
+*              {
+*                  "token" : "token which user received in email",
+*                  "password" : "some secure password"
+*              }
+*     responses:
+*       200:
+*         description: Password updated successfully
+*       422:
+*         description: Token expired, please request new link
+*/
