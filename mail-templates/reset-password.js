@@ -51,7 +51,7 @@ var template = (token) => `
                                         <p style="color:tomato; font-size:15px;line-height:24px; margin:0;">
                                             This link will expire in 2 hours
                                         </p>
-                                        <a href="http://localhost:3000/reset/${token}"
+                                        <a href="https://dcx-developer-directory.netlify.app/reset/${token}"
                                             style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                             Password</a>
                                     </td>
@@ -63,7 +63,7 @@ var template = (token) => `
                                     <td style="text-align:center; padding:0 35px;">
                                         OR Copy below url and paste in browser
                                         <p style="text-align:center; margin:0px 20px">
-                                            <pre>http://localhost:3000/reset/${token}</pre>
+                                            <pre>https://dcx-developer-directory.netlify.app/reset/${token}</pre>
                                         </p>
                                     </td>
                                 <tr>

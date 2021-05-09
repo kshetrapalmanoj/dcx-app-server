@@ -115,7 +115,7 @@ var template = (name) => `
                       </p>
 
                       <a
-                        href="http://localhost:3000/browse"
+                        href="https://dcx-developer-directory.netlify.app/browse"
                         style="
                           background: #20e277;
                           text-decoration: none !important;
